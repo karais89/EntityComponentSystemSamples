@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 // ReSharper disable once InconsistentNaming
@@ -15,6 +16,9 @@ public class RotationSpeedAuthoring_ForEach : MonoBehaviour, IConvertGameObjectT
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
         var data = new RotationSpeed_ForEach { RadiansPerSecond = math.radians(DegreesPerSecond) };
+        var scale = new NonUniformScale {Value = new float3(1, 1, 1)};
+        
         dstManager.AddComponentData(entity, data);
+        dstManager.AddComponentData(entity, scale);
     }
 }
